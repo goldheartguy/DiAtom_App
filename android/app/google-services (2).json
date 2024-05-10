@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "291373039055",
+    "project_id": "diatom-50b1b",
+    "storage_bucket": "diatom-50b1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291373039055:android:3b0827fc2d0e99a7e266ba",
+        "android_client_info": {
+          "package_name": "com.example.diatom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291373039055-n1cmruaekaci6rba4fakq0ta2uk3ul99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diatom",
+            "certificate_hash": "51572eadc6a0b8380993045f0371e5f05755690e"
+          }
+        },
+        {
+          "client_id": "291373039055-uh5jfi50kq58drtshhvs3nhi09k3pnb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcy8Ys0GrcpnCR86rIIH6fzwcussGUuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291373039055-uh5jfi50kq58drtshhvs3nhi09k3pnb4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291373039055-i725ia6uo32dkrqv98jdsah852stmg2j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diatom"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
