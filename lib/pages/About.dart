@@ -165,7 +165,7 @@ class AboutPage extends StatelessWidget {
         // Description
         Text(
           description,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.justify,
           style: TextStyle(
             fontSize: 16.0,
             color: Colors.grey,
