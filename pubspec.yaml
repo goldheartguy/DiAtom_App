@@ -52,6 +52,9 @@ dependencies:
   chat_gpt_sdk: ^3.0.4
   dash_chat_2: ^0.0.20
   flutter_svg: ^2.0.9
+  flutter_local_notifications: ^17.1.2
+  awesome_notifications: ^0.8.2
+  fl_chart: ^0.68.0
   
 dev_dependencies:
   flutter_test:

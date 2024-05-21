@@ -28,13 +28,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 166, 126, 1),
-        title: const Text(
-          'GPT Chat',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
       body: DashChat(
         currentUser: _currentUser,
         typingUsers: _typingUsers,

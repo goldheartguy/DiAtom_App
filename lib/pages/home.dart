@@ -31,19 +31,7 @@ class _HomeState extends State<Home> {
     _getNews();
   }
 
-  void signUserOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-
-      final GoogleSignIn _googleSignIn = GoogleSignIn();
-      await _googleSignIn.signOut();
-
-      Get.offAll(() => LoginPage());
-    } catch (e, stackTrace) {
-      print("Error signing out: $e");
-      print("StackTrace: $stackTrace");
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -114,18 +102,10 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              child: FloatingActionButton(
-                onPressed: signUserOut,
-                tooltip: 'Sign Out',
-                child: const Icon(Icons.logout, color: Colors.white),
-                backgroundColor: Colors
-                    .transparent, // Set to transparent to show the gradient
-              ),
             ),
           ],
         ),
       ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 

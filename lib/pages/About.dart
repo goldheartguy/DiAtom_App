@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:diatom/pages/products/Product_detail1.dart';
-import 'package:diatom/pages/products/Product_detail2.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -30,29 +28,7 @@ class _AboutState extends State<About> {
         description:
             'Pioneering industry envision a future where our advanced respiratory solutions ensure universal access to life-saving care, making a lasting impact on global healthcare resilience.',
       ),
-      Products(
-        imagePath1: 'assets/images/logo.png',
-        imagePath2: 'assets/images/logo.png',
-        title: 'Products',
-        onTap1: navigateToProduct1,
-        onTap2: navigateToProduct2,
-        child: Text('Learn More'),
-      ),
     ];
-  }
-
-  void navigateToProduct1() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Product1()),
-    );
-  }
-
-  void navigateToProduct2() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => product2()),
-    );
   }
 
   @override
@@ -173,70 +149,6 @@ class AboutPage extends StatelessWidget {
         ),
         SizedBox(height: 20.0),
       ],
-    );
-  }
-}
-
-class Products extends StatelessWidget {
-  final String imagePath1;
-  final String imagePath2;
-  final String title;
-  final VoidCallback onTap1;
-  final VoidCallback onTap2;
-  final Widget child;
-
-  const Products({
-    Key? key,
-    required this.imagePath1,
-    required this.imagePath2,
-    required this.title,
-    required this.onTap1,
-    required this.onTap2,
-    required this.child,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Column(
-        children: [
-          Column(
-            children: [
-              GestureDetector(
-                onTap: onTap1,
-                child: Image.asset(
-                  imagePath1,
-                  height: 150.0,
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: onTap1,
-                child: child,
-              ),
-            ],
-          ),
-          SizedBox(width: 20.0),
-          Column(
-            children: [
-              GestureDetector(
-                onTap: onTap2,
-                child: Image.asset(
-                  imagePath2,
-                  height: 150.0,
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: onTap2,
-                child: child,
-              ),
-            ],
-          ),
-          SizedBox(width: 20.0),
-        ],
-      ),
     );
   }
 }

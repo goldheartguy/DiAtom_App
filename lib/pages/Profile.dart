@@ -2,6 +2,9 @@ import 'package:diatom/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 class Profile extends StatelessWidget {
   Profile({Key? key}) : super(key: key);
@@ -175,6 +178,11 @@ class Profile extends StatelessWidget {
             leading: Icon(Icons.delete_forever),
             title: Text('Delete Account'),
             onTap: () => _deleteAccount(context),
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text('Log Out'),
+            onTap: () => signUserOut(),
           ),
         ],
       ),
@@ -383,5 +391,19 @@ class Profile extends StatelessWidget {
         ),
       );
     }
+  }
+}
+
+signUserOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    await _googleSignIn.signOut();
+
+    Get.offAll(() => LoginPage());
+  } catch (e, stackTrace) {
+    print("Error signing out: $e");
+    print("StackTrace: $stackTrace");
   }
 }
