@@ -107,6 +107,11 @@ class Profile extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 5),
+                      ListTile(
+                        leading: Icon(Icons.logout),
+                        title: Text('Log Out'),
+                        onTap: () => signUserOut(),
+                      ),
                     ],
                   ),
                 ),

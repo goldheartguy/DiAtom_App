@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diatom/pages/nav.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,10 +15,6 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
-String? userName = null;
-String? userEmail = null;
-String? userPword = null;
 
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
@@ -77,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       );
       final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
       if (gUser == null) {
-        return null;
+        return;
       }
       final GoogleSignInAuthentication gAuth = await gUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -86,17 +83,45 @@ class _LoginPageState extends State<LoginPage> {
       );
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      final User user = authResult.user!;
-      userName = user.displayName;
-      userEmail = user.email;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const nav()),
-      );
+      final User? user = authResult.user;
+
+      if (user != null) {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(user.uid)
+            .get();
+
+        if (!userDoc.exists) {
+          await addUserDetails(
+            user.uid,
+            user.displayName ?? '',
+            user.email ?? '',
+            '', // Phone can be updated later
+            '', // Bio can be updated later
+          );
+        }
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const nav()),
+        );
+      }
+
       print("Signed-in successfully with Google.");
     } catch (e) {
       print('Error during Google sign-in: $e');
     }
+  }
+
+  Future<void> addUserDetails(String documentId, String username, String email,
+      String phone, String bio) async {
+    await FirebaseFirestore.instance.collection('Users').doc(documentId).set({
+      'Username': username,
+      'Email': email,
+      'Phone': phone,
+      'Bio': bio,
+      'uid': documentId,
+    });
   }
 
   @override
@@ -125,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
                 textfield(
                   controller: emailController,
-                  hintText: "Enter you email",
+                  hintText: "Enter your email",
                   obscureText: false,
                 ),
                 const SizedBox(height: 25),
@@ -171,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text('Or  Continue With',
+                        child: Text('Or Continue With',
                             style: TextStyle(
                                 color: Color.fromRGBO(97, 97, 97, 1))),
                       ),
